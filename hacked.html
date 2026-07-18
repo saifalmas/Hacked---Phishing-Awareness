@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Alert</title>
+  <link rel="stylesheet" href="hackedcss.css" />
+</head>
+<body>
+  <div class="scanlines"></div>
+
+  <main class="terminal">
+    <!-- Breach alert stage -->
+    <section class="breach" id="breach">
+      <div class="warning-icon" aria-hidden="true">&#9888;</div>
+      <h1 class="glitch" data-text="SYSTEM COMPROMISED">SYSTEM COMPROMISED</h1>
+      <p class="subhead">// HACKED</p>
+      <p class="typed" id="typed"></p>
+      <div class="fakebar">
+        <span class="fakebar-fill"></span>
+      </div>
+      <p class="status" id="status">Extracting credentials<span class="dots"></span></p>
+    </section>
+
+    <!-- Reveal stage -->
+    <section class="reveal" id="reveal">
+      <div class="check-icon" aria-hidden="true">&#10003;</div>
+      <h2>Just kidding.</h2>
+      <p class="reveal-body">
+        Nothing was taken. Nothing was accessed.
+      </p>
+      <p class="reveal-body">
+        But this is exactly what a malicious QR code or phishing link
+        could look like — and by the time you saw a screen like this,
+        it could already be too late.
+      </p>
+      <p class="reveal-lesson">
+        Always verify a QR code's source before scanning.<br />
+        A moment of curiosity is all it takes.
+      </p>
+    </section>
+  </main>
+
+  <script src="hackedjs.js"></script>
+</body>
+</html>
