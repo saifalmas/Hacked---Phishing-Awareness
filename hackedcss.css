@@ -1,0 +1,230 @@
+:root {
+  --bg: #0a0a0c;
+  --red: #ff2b2b;
+  --amber: #ffb020;
+  --green: #22e584;
+  --dim: #7a1414;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100%;
+  background: var(--bg);
+  font-family: "Courier New", Courier, monospace;
+  color: var(--red);
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Subtle CRT scanline overlay */
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03) 0px,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 5;
+  height: 100vh;
+}
+
+.terminal {
+  width: 100%;
+  max-width: 640px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- Breach stage ---------- */
+.breach {
+  animation: flicker 3s infinite;
+}
+
+.warning-icon {
+  font-size: 72px;
+  color: var(--amber);
+  line-height: 1;
+  margin-bottom: 16px;
+  text-shadow: 0 0 18px rgba(255, 176, 32, 0.6);
+}
+
+h1.glitch {
+  font-size: clamp(28px, 8vw, 56px);
+  letter-spacing: 2px;
+  color: var(--red);
+  position: relative;
+  text-shadow: 0 0 12px rgba(255, 43, 43, 0.7);
+  margin-bottom: 8px;
+}
+
+/* Glitch layers */
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+}
+.glitch::before {
+  color: var(--amber);
+  transform: translate(2px, 0);
+  clip-path: inset(0 0 55% 0);
+  animation: glitchTop 2s infinite linear alternate;
+  opacity: 0.7;
+}
+.glitch::after {
+  color: #2bd4ff;
+  transform: translate(-2px, 0);
+  clip-path: inset(55% 0 0 0);
+  animation: glitchBottom 1.6s infinite linear alternate;
+  opacity: 0.6;
+}
+
+.subhead {
+  color: var(--amber);
+  font-size: clamp(14px, 3.5vw, 20px);
+  letter-spacing: 4px;
+  margin-bottom: 28px;
+}
+
+.typed {
+  font-size: clamp(15px, 3.8vw, 21px);
+  color: #ff6666;
+  min-height: 1.4em;
+  margin-bottom: 26px;
+  letter-spacing: 1px;
+}
+
+.fakebar {
+  width: 80%;
+  max-width: 420px;
+  height: 14px;
+  border: 1px solid var(--dim);
+  margin: 0 auto 14px;
+  background: #140505;
+  position: relative;
+  overflow: hidden;
+}
+.fakebar-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--dim), var(--red));
+  animation: fill 2s ease-in-out forwards;
+}
+
+.status {
+  font-size: clamp(13px, 3.2vw, 17px);
+  color: #cc4444;
+  letter-spacing: 1px;
+}
+
+/* ---------- Reveal stage ---------- */
+.reveal {
+  display: none;
+  animation: fadeIn 1.1s ease forwards;
+}
+
+.check-icon {
+  font-size: 64px;
+  color: var(--green);
+  line-height: 1;
+  margin-bottom: 18px;
+  text-shadow: 0 0 18px rgba(34, 229, 132, 0.5);
+}
+
+.reveal h2 {
+  color: var(--green);
+  font-size: clamp(26px, 7vw, 44px);
+  letter-spacing: 1px;
+  margin-bottom: 22px;
+  text-shadow: 0 0 12px rgba(34, 229, 132, 0.4);
+}
+
+.reveal-body {
+  color: #d7e7dd;
+  font-size: clamp(15px, 3.6vw, 19px);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.reveal-lesson {
+  margin-top: 26px;
+  color: var(--amber);
+  font-size: clamp(15px, 3.8vw, 20px);
+  line-height: 1.7;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 10px rgba(255, 176, 32, 0.35);
+}
+
+/* ---------- Animations ---------- */
+@keyframes fill {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.75; }
+  94% { opacity: 1; }
+  97% { opacity: 0.85; }
+  98% { opacity: 1; }
+}
+
+@keyframes glitchTop {
+  0% { transform: translate(2px, 0); }
+  50% { transform: translate(-1px, -1px); }
+  100% { transform: translate(3px, 1px); }
+}
+
+@keyframes glitchBottom {
+  0% { transform: translate(-2px, 0); }
+  50% { transform: translate(1px, 1px); }
+  100% { transform: translate(-3px, -1px); }
+}
+
+.dots::after {
+  content: "";
+  animation: dots 1.2s steps(4, end) infinite;
+}
+@keyframes dots {
+  0% { content: ""; }
+  25% { content: "."; }
+  50% { content: ".."; }
+  75% { content: "..."; }
+  100% { content: ""; }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .breach, .glitch::before, .glitch::after,
+  .fakebar-fill, .dots::after {
+    animation: none !important;
+  }
+}
